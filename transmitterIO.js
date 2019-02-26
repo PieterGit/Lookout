@@ -156,8 +156,8 @@ module.exports = async (options, storage, storageLock, client, fakeMeter) => {
     const now = moment();
     let stopWhen = stopTime || now;
 
-    // if the commanded stop time is older than 2 hours, use current time
-    if (stopTime.diff(now, 'minutes') > 120) {
+    // if the commanded stop time is unknown or older than 2 hours, use current time
+    if (!stopTime || stopTime.diff(now, 'minutes') > 120) {
       stopWhen = now;
     }
 
